@@ -26,7 +26,6 @@ const CpfValidation = (cpf: string): boolean => {
   if (Resto === 10 || Resto === 11) Resto = 0;
   if (Resto !== parseInt(cpf.substring(10, 11), 10)) return false;
   return true;
-  throw new Error("Method not implemented.");
 };
 
 export { CpfValidation, emailValidation };
