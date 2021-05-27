@@ -1,7 +1,13 @@
 import { Response, Request } from "express";
 
 import { CpfValidation, emailValidation } from "../lib";
-import { createUser, getByCpf, findAllusers } from "../services/UsersServices";
+import {
+  createUser,
+  getByCpf,
+  findAllusers,
+  validateUser,
+  findByName,
+} from "../services/UsersServices";
 
 const createUserController = async (
   request: Request,
@@ -49,4 +55,32 @@ const findAllUsersController = async (
   return response.status(200).json(allUsers.rows);
 };
 
-export { createUserController, findAllUsersController };
+const findUser = async (
+  request: Request,
+  response: Response
+): Promise<Response> => {
+  const { name } = request.params;
+  const user = await findByName(name);
+
+  return response.status(200).json(user);
+};
+
+const updateUser = async (
+  request: Request,
+  response: Response
+): Promise<Response> => {
+  const { name } = request.params;
+
+  const allUsers = await findAllusers();
+  console.log(allUsers);
+
+  const myUser = await allUsers.rows.find((obj) => {
+    return obj.name.replace(/\s/g, "") === name;
+  });
+
+  validateUser(myUser.name);
+  // const newName = name.replace(/\s/g, "");
+  return response.json("User Updated Successfully");
+};
+
+export { createUserController, findAllUsersController, findUser, updateUser };
