@@ -54,7 +54,7 @@ const findByName = async (name: string): Promise<QueryResult> => {
 const validateUser = async (name: string): Promise<void> => {
   await db.query(
     `UPDATE users
-	SET validate = true
+	SET validate = true, validatedat = now()
   WHERE name = $1;`,
     [name]
   );
