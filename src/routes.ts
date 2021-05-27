@@ -3,6 +3,7 @@ import { Router } from "express";
 import {
   createUserController,
   findAllUsersController,
+  findUser,
   updateUser,
 } from "./controllers/UserController";
 
@@ -11,7 +12,7 @@ const router = Router();
 router.post("/registrar", createUserController);
 // Admin
 router.get("/registros", findAllUsersController);
-router.get("/:name/validar"); // PENDENTE
+router.get("/:name/validar", findUser); // PENDENTE
 router.put("/:name/validar", updateUser);
 
 export { router };

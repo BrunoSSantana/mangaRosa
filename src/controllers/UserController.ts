@@ -49,7 +49,17 @@ const findAllUsersController = async (
   return response.status(200).json(allUsers.rows);
 };
 
-export const updateUser = async (
+const findUser = async (
+  request: Request,
+  response: Response
+): Promise<Response> => {
+  const { name } = request.params;
+  const user = await findByName(name);
+
+  return response.status(200).json(user);
+};
+
+const updateUser = async (
   request: Request,
   response: Response
 ): Promise<Response> => {

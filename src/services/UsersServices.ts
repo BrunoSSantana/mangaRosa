@@ -42,6 +42,15 @@ const findAllusers = async (): Promise<QueryResult> => {
   return allUsers;
 };
 
+const findByName = async (name: string): Promise<QueryResult> => {
+  const allUsers = await findAllusers();
+
+  const myUser = await allUsers.rows.find((obj) => {
+    return obj.name.replace(/\s/g, "") === name;
+  });
+  return myUser;
+};
+
 const validateUser = async (name: string): Promise<void> => {
   await db.query(
     `UPDATE users
@@ -51,4 +60,4 @@ const validateUser = async (name: string): Promise<void> => {
   );
 };
 
-export { createUser, getByCpf, findAllusers, validateUser };
+export { createUser, getByCpf, findAllusers, validateUser, findByName };
