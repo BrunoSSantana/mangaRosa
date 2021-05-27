@@ -49,4 +49,22 @@ const findAllUsersController = async (
   return response.status(200).json(allUsers.rows);
 };
 
+export const updateUser = async (
+  request: Request,
+  response: Response
+): Promise<Response> => {
+  const { name } = request.params;
+
+  const allUsers = await findAllusers();
+  console.log(allUsers);
+
+  const myUser = await allUsers.rows.find((obj) => {
+    return obj.name.replace(/\s/g, "") === name;
+  });
+
+  validateUser(myUser.name);
+  // const newName = name.replace(/\s/g, "");
+  return response.json("User Updated Successfully");
+};
+
 export { createUserController, findAllUsersController };

@@ -8,7 +8,6 @@ import {
 const router = Router();
 
 router.post("/registrar", createUserController);
-
-router.get("/", findAllUsersController);
+router.put("/:name/validar", updateUser);
 
 export { router };

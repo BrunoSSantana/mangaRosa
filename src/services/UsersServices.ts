@@ -42,4 +42,13 @@ const findAllusers = async (): Promise<QueryResult> => {
   return allUsers;
 };
 
-export { createUser, getByCpf, findAllusers };
+const validateUser = async (name: string): Promise<void> => {
+  await db.query(
+    `UPDATE users
+	SET validate = true
+  WHERE name = $1;`,
+    [name]
+  );
+};
+
+export { createUser, getByCpf, findAllusers, validateUser };
