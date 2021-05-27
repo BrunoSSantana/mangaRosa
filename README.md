@@ -40,13 +40,13 @@ name: string
 email: string
 cpf: string
 cell: string
-knowledge: list[]
+skills: list[]
 validation: boolean
 validatedAt: date
 
 ### Listando os Registros
 - Enviando Para: **http://localhost/registros**
-	- [name, email, cpf, cell, knowledge, validation]
+	- [name, email, cpf, cell, skills, validation]
 
 ### Validando Registros
 - Recebendo de: **http://localhost/NOMEDOCOLABORADOR/validar**
