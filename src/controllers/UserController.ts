@@ -1,7 +1,13 @@
 import { Response, Request } from "express";
 
 import { CpfValidation, emailValidation } from "../lib";
-import { createUser, getByCpf, findAllusers } from "../services/UsersServices";
+import {
+  createUser,
+  getByCpf,
+  findAllusers,
+  validateUser,
+  findByName,
+} from "../services/UsersServices";
 
 const createUserController = async (
   request: Request,
@@ -77,4 +83,4 @@ const updateUser = async (
   return response.json("User Updated Successfully");
 };
 
-export { createUserController, findAllUsersController };
+export { createUserController, findAllUsersController, findUser, updateUser };
