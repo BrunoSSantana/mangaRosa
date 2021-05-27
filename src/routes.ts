@@ -1,10 +1,14 @@
 import { Router } from "express";
 
+import {
+  createUserController,
+  findAllUsersController,
+} from "./controllers/UserController";
+
 const router = Router();
 
-router.get("/:nomeDoColaborador/registrar", (request, response) => {
-  // const { name, email, cpf, cell, skills } = request.body;
-  return response.send();
-});
+router.post("/registrar", createUserController);
+
+router.get("/", findAllUsersController);
 
 export { router };
