@@ -2,14 +2,13 @@ import { QueryResult } from "pg";
 
 import { db } from "../database";
 
-const getByCpf = async (cpf: string): Promise<QueryResult> => {
+const getByCpf = async (cpf: string): Promise<QueryResult> | undefined => {
+  console.log(cpf);
   const user: QueryResult = await db.query(
     "SELECT * FROM users WHERE cpf = $1;",
     [cpf]
   );
-  console.log(user.rows[0].cpf);
-  console.log(cpf);
-
+  // console.log(user);
   return user;
 };
 
@@ -20,7 +19,7 @@ const createUser = async (
   cell: string,
   skills: string[],
   validate: boolean
-): Promise<QueryResult> => {
+): Promise<void> => {
   const user = [name, email, cpf, cell, skills, validate];
   const query = `
     INSERT INTO users (
@@ -35,8 +34,6 @@ const createUser = async (
     `;
 
   await db.query(query, user);
-  const newUser = await getByCpf(cpf);
-  return newUser.rows[0];
 };
 
 export { createUser, getByCpf };

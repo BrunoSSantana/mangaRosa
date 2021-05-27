@@ -13,8 +13,8 @@ const create = async (
     // verifica se o usuário existe
     const useralreadyExists = await getByCpf(cpf);
 
-    // dentro do objeto que o pg buscou eu pego o cpf da 1º row e comparo
-    if (useralreadyExists.rows[0].cpf !== undefined) {
+    // Verifica se  usuário existe
+    if (useralreadyExists.rows[0] !== undefined) {
       return response.status(400).json({ message: "Usuário exite" });
     }
 
@@ -32,10 +32,10 @@ const create = async (
       return response.status(400).json({ message: "skills Vazias" });
     }
 
-    const user = await createUser(name, email, cpf, cell, skills, validate);
+    await createUser(name, email, cpf, cell, skills, validate);
 
     // enviado apenas a linha do retorno do getBycpf
-    return response.status(201).json(user);
+    return response.status(201).json({ message: "criado com sucesso" });
   } catch (err) {
     return response.status(400).json({ message: err.message });
   }
