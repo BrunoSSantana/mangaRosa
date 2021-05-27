@@ -1,9 +1,14 @@
 import { Router } from "express";
 
-import { create } from "./controllers/UserController";
+import {
+  createUserController,
+  findAllUsersController,
+} from "./controllers/UserController";
 
 const router = Router();
 
-router.post("/registrar", create);
+router.post("/registrar", createUserController);
+
+router.get("/", findAllUsersController);
 
 export { router };

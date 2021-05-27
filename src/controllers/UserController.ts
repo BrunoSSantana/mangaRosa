@@ -1,9 +1,9 @@
 import { Response, Request } from "express";
 
 import { CpfValidation, emailValidation } from "../lib";
-import { createUser, getByCpf } from "../services/UsersServices";
+import { createUser, getByCpf, findAllusers } from "../services/UsersServices";
 
-const create = async (
+const createUserController = async (
   request: Request,
   response: Response
 ): Promise<Response> => {
@@ -41,4 +41,12 @@ const create = async (
   }
 };
 
-export { create };
+const findAllUsersController = async (
+  request: Request,
+  response: Response
+): Promise<Response> => {
+  const allUsers = await findAllusers();
+  return response.status(200).json(allUsers.rows);
+};
+
+export { createUserController, findAllUsersController };

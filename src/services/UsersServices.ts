@@ -36,4 +36,10 @@ const createUser = async (
   await db.query(query, user);
 };
 
-export { createUser, getByCpf };
+const findAllusers = async (): Promise<QueryResult> => {
+  const allUsers: QueryResult = await db.query(`SELECT * FROM users`);
+
+  return allUsers;
+};
+
+export { createUser, getByCpf, findAllusers };
