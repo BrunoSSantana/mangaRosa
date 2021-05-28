@@ -1,4 +1,5 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
+import { Route } from "react-router-dom"
 import { Form } from "@unform/web";
 import * as Yup from "yup";
 import Input from "./Components/Form/input";
@@ -38,30 +39,45 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    setTimeout(() => {
-      formRef.current.setData({
-        name: "Bruno Santana",
-        email: "bruno@gmail.com",
-        cpf: "10943557470",
-      })
-    }, 2000)
-  }, [])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     formRef.current.setData({
+  //       name: "Bruno Santana",
+  //       email: "bruno@gmail.com",
+  //       cpf: "10943557470",
+  //     })
+  //   }, 2000)
+  // }, [])
 
   return (
     <div className="App">
       <h1>mangaRosa</h1>
+{/* Rota do Formulário */}
 
-      <Form ref={formRef} onSubmit={handleSubmit} method="POST" action="/admin/recipes">
-        <labe>Nome</labe>
-        <Input placeholder="Seu nome completo" type="text" name="name"></Input>
-        <Input placeholder="Seu melhor email" type="email" name="email"></Input>
-        <Input placeholder="___-___-___-__" type="text" name="cpf"></Input>
-        <Input placeholder="(81) 9 9805 - 6657" type="text" name="cell"></Input>
-        <Input placeholder="Seu nome completo" type="text" name="skills"></Input>
+      <Route exact path="/registrar" render={() => (
+        <Form ref={formRef} onSubmit={handleSubmit} method="POST" action="/registrar">
+          <labe>Nome</labe>
+          <Input placeholder="Seu nome completo" type="text" name="name"></Input>
+          <Input placeholder="Seu melhor email" type="email" name="email"></Input>
+          <Input placeholder="___-___-___-__" type="text" name="cpf"></Input>
+          <Input placeholder="(81) 9 9805 - 6657" type="text" name="cell"></Input>
+          <Input placeholder="Seu nome completo" type="text" name="skills"></Input>
 
-        <button type="submit">Enviar</button>
-      </Form>
+          <button type="submit">Enviar</button>
+        </Form>
+      )} />
+{/* Rota de todos os Cadastros */}
+
+      <Route exact path="/registros" render={() => (
+        <div>Listagem dos registros</div>
+      )} />
+{/* Rota para validação do Cadastro do Colaborador */}
+
+      <Route exact path="/:name/validar" render={() => (
+        <div>Registro do Colaborador</div>
+      )} />
+
+
     </div>
   )
 }
