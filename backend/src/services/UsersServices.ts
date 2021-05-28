@@ -37,7 +37,9 @@ const createUser = async (
 };
 
 const findAllusers = async (): Promise<QueryResult> => {
-  const allUsers: QueryResult = await db.query(`SELECT * FROM users`);
+  const allUsers: QueryResult = await db.query(
+    `SELECT * FROM users ORDER BY name`
+  );
 
   return allUsers;
 };
